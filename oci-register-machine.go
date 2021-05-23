@@ -165,21 +165,16 @@ func main() {
 
 	switch stage {
 	case "prestart":
-		{
-			if err = RegisterMachine(state.ID, passId, int(state.Pid), state.Root); err != nil {
-				log.Fatalf("Register machine failed: %s", err)
-			}
-			return
+		if err = RegisterMachine(state.ID, passId, int(state.Pid), state.Root); err != nil {
+			log.Fatalf("Register machine failed: %s", err)
 		}
 	case "poststop":
-		{
-			if err := TerminateMachine(state.ID); err != nil {
-				if !strings.Contains(err.Error(), "No machine") {
-					log.Fatalf("TerminateMachine failed: %s", err)
-				}
+		if err := TerminateMachine(state.ID); err != nil {
+			if !strings.Contains(err.Error(), "No machine") {
+				log.Fatalf("TerminateMachine failed: %s", err)
 			}
-			return
 		}
+	default:
 		log.Printf("Does not support the %q stage must be prestart|poststop", stage)
 	}
 }
