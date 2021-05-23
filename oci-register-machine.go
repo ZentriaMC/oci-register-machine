@@ -12,7 +12,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/godbus/dbus"
+	"github.com/godbus/dbus/v5"
 	"gopkg.in/yaml.v1"
 )
 
