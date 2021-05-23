@@ -167,6 +167,6 @@ func main() {
 			}
 		}
 	default:
-		log.Printf("Does not support the %q stage must be prestart|poststop", stage)
+		log.Printf("Does not support the %q stage must be created|stopped", state.Status)
 	}
 }
