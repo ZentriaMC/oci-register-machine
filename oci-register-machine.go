@@ -10,6 +10,7 @@ import (
 	"log"
 	"log/syslog"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/godbus/dbus/v5"
@@ -67,6 +68,10 @@ func RegisterMachine(name string, id string, pid int, root_directory string) err
 	}
 	if len(name) > 32 {
 		name = name[0:32]
+	}
+
+	if !filepath.IsAbs(root_directory) {
+		root_directory = ""
 	}
 
 	return obj.Call("org.freedesktop.machine1.Manager.RegisterMachine", 0, name, av, service, "container", uint32(pid), root_directory).Err
